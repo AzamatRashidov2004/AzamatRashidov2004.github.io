@@ -1,0 +1,2056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinguaPath | Language Learning Journey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #c08497; /* Dusty rose instead of orange */
+            --secondary: #f0e4eb; /* Light pink instead of beige */
+            --dark: #2a2a2a;
+            --light: #ffffff;
+            --overlay: rgba(0, 0, 0, 0.7);
+            --bg-dark: #1d1d1d;
+            --text-light: #eaeaea;
+            --accent: #a67f8e; /* Deeper rose for accents */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        h1, h2, h3, h4 {
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 1px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            color: var(--light);
+            overflow: hidden;
+        }
+        
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.ibb.co/23fxf38B/photo-2025-04-28-23-47-29.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.4);
+            z-index: 1;
+            background-repeat: no-repeat;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 60px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .header-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            line-height: 1.2;
+        }
+        
+        .header-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .btn:hover {
+            background-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 25px rgba(192, 132, 151, 0.4);
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-scrolled {
+            background-color: rgba(0, 0, 0, 0.85);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 2px;
+        }
+        
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            margin-right: 12px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            box-shadow: 0 0 15px rgba(192, 132, 151, 0.5);
+        }
+        
+        .nav-list {
+            list-style: none;
+            display: flex;
+        }
+        
+        .nav-list li {
+            padding: 0 15px;
+        }
+        
+        .nav-list a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s;
+            position: relative;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .nav-list a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-list a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        .nav-list a:hover::after {
+            width: 100%;
+        }
+        
+        .social-links {
+            display: flex;
+        }
+        
+        .social-links a {
+            color: var(--light);
+            margin-left: 15px;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 90px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 3rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--light);
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            background-color: var(--primary);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* About Section */
+        .about-section {
+            background-color: #222;
+            color: var(--text-light);
+        }
+        
+        .about-content {
+            display: flex;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h2 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            font-size: 2.4rem;
+            font-weight: 500;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+        
+        .about-text strong {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .about-images {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 20px;
+        }
+        
+        .about-image {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .about-image:hover {
+            transform: translateY(-10px);
+        }
+        
+        .about-image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 100%;
+        }
+        
+        .about-image-container img {
+            width: 100%;
+            height: 100%;
+            object-position: center 90%; /* <-- Add this line */
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image-container:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* Academic Background */
+        .academic-section {
+            background-color: #181818;
+            padding: 90px 0;
+        }
+        
+        .academic-text {
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto 70px;
+            line-height: 1.9;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+        
+        .academic-text strong {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .academic-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        
+        .academic-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: #222;
+        }
+        
+        .academic-item:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 12px 30px rgba(192, 132, 151, 0.2);
+        }
+        
+        .academic-img {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .academic-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 50%;
+            transition: transform 0.5s ease;
+        }
+        
+        .academic-item:hover .academic-img img {
+            transform: scale(1.1);
+        }
+        
+        .academic-caption {
+            padding: 25px 20px;
+            text-align: center;
+            background-color: #222;
+            color: white;
+        }
+        
+        .academic-caption h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .academic-caption p {
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+        
+        /* Social Life Section */
+        .social-section {
+            background: linear-gradient(to right, #141414, #252525);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-section::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(192, 132, 151, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 80% 60%, rgba(192, 132, 151, 0.1) 0%, transparent 20%);
+            z-index: 0;
+        }
+        
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .social-card {
+            background-color: rgba(34, 34, 34, 0.8);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .social-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(192, 132, 151, 0.2);
+        }
+        
+        .social-icon {
+            width: 150px;
+            height: 150px;
+            margin: 35px auto 25px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(192, 132, 151, 0.3);
+        }
+        
+        .social-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+
+        }
+        
+        .social-content {
+            padding: 20px 30px 35px;
+            text-align: center;
+        }
+        
+        .social-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 18px;
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .social-content p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+        
+        /* Interests Section */
+        .interests-section {
+            background-color: #1a1a1a;
+            padding: 110px 0;
+            position: relative;
+        }
+        
+        .interests-container {
+            background-color: rgba(34, 34, 34, 0.8);
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .interests-title {
+            font-size: 2.2rem;
+            margin-bottom: 35px;
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .interests-text {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 0;
+            font-weight: 300;
+        }
+        
+        /* Quote Section */
+        .quote-section {
+            background: url('https://i.ibb.co/6RYtP7xv/photo-2025-04-28-23-47-30.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 120px 0;
+            text-align: center;
+            color: var(--light);
+            position: relative;
+        }
+        
+        .quote-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .quote-title {
+            font-size: 2.3rem;
+            margin-bottom: 35px;
+            color: var(--light);
+            font-weight: 500;
+        }
+        
+        .quote-text {
+            font-size: 2rem;
+            font-style: italic;
+            margin-bottom: 40px;
+            line-height: 1.4;
+            position: relative;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+        }
+        
+        .quote-text::before,
+        .quote-text::after {
+            content: '"';
+            font-size: 3.5rem;
+            color: var(--primary);
+            position: absolute;
+            line-height: 0;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        .quote-text::before {
+            top: 0.5rem;
+            left: -1.5rem;
+        }
+        
+        .quote-text::after {
+            bottom: -0.2rem;
+            right: -1.5rem;
+        }
+        
+        /* Professional Background */
+        .professional-section {
+            background-color: #181818;
+            padding: 90px 0;
+            position: relative;
+        }
+        
+        .professional-container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .professional-intro {
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto 60px;
+            font-size: 1.1rem;
+            line-height: 1.9;
+            font-weight: 300;
+        }
+        
+        .professional-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+        
+        .professional-card {
+            background-color: #222;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            height: 100%;
+        }
+        
+        .professional-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 15px 35px rgba(192, 132, 151, 0.15);
+        }
+        
+        .professional-icon {
+            background-color: var(--primary);
+            height: 6px;
+            width: 100%;
+        }
+        
+        .professional-content {
+            padding: 30px;
+        }
+        
+        .professional-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 18px;
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .professional-content p {
+            font-size: 1rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+        
+        /* Gallery */
+        .gallery {
+            padding: 90px 0;
+            background-color: #1a1a1a;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .gallery-item {
+            height: 270px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 12px 30px rgba(192, 132, 151, 0.2);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* Reviews */
+        .reviews-section {
+            background-color: #181818;
+            padding: 110px 0;
+        }
+        
+        .reviews-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 50px;
+        }
+        
+        .review-card {
+            background-color: #222;
+            border-radius: 15px;
+            padding: 35px;
+            position: relative;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+            display: flex;
+            gap: 30px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .review-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--primary);
+        }
+        
+        .review-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .review-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .review-content {
+            flex: 1;
+        }
+        
+        .review-text {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-style: italic;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+        
+        .review-author {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: var(--primary);
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        .review-position {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 300;
+        }
+        
+        /* Resume Section */
+        .resume-section {
+            background-color: #1a1a1a;
+            padding: 90px 0;
+        }
+        
+        .resume-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #222;
+            border-radius: 15px;
+            padding: 50px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .resume-header {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        
+        .resume-header h2 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .resume-header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        .resume-section-title {
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            color: var(--primary);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .resume-item {
+            margin-bottom: 35px;
+        }
+        
+        .resume-item-title {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: white;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        .resume-item-subtitle {
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+            font-style: italic;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        .resume-item-date {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 12px;
+            font-weight: 300;
+        }
+        
+        .resume-item-description {
+            font-size: 1rem;
+            color: var(--text-light);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+        
+        .resume-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+        }
+        
+        .resume-skill {
+            background-color: rgba(192, 132, 151, 0.1);
+            color: var(--primary);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(192, 132, 151, 0.2);
+        }
+        
+        .resume-skill:hover {
+            background-color: rgba(192, 132, 151, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            padding: 110px 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)), url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+        
+        .contact-info {
+            background-color: rgba(34, 34, 34, 0.8);
+            padding: 50px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 35px;
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .contact-icon {
+            width: 52px;
+            height: 52px;
+            background-color: rgba(192, 132, 151, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 25px;
+            color: var(--primary);
+            border: 1px solid rgba(192, 132, 151, 0.2);
+        }
+        
+        .contact-details h4 {
+            font-size: 1.25rem;
+            margin-bottom: 5px;
+            color: white;
+            font-weight: 500;
+        }
+        
+        .contact-details p {
+            font-size: 1rem;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+        
+        .contact-form {
+            background-color: rgba(34, 34, 34, 0.8);
+            padding: 50px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .contact-form h3 {
+            font-size: 2rem;
+            margin-bottom: 35px;
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 16px;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+        }
+        
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            background-color: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 10px rgba(192, 132, 151, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 160px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: #111;
+            padding: 80px 0 30px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            margin-bottom: 25px;
+            display: inline-flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 2px;
+        }
+        
+        .footer-logo-img {
+            width: 42px;
+            height: 42px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(192, 132, 151, 0.4);
+        }
+        
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+            color: var(--primary);
+            font-weight: 400;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        .footer-contacts {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: white;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+        
+        .footer-social {
+            margin: 35px 0;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        }
+        
+        .footer-social a {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            transition: all 0.4s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-social a:hover {
+            background-color: var(--primary);
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(192, 132, 151, 0.3);
+        }
+        
+        .footer-social svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .footer-bottom {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .copyright {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+        
+        /* Arrow Down */
+        .arrow-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            animation: bounce 2s infinite;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(192, 132, 151, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .arrow-down:hover {
+            background-color: var(--primary);
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+        
+        /* Responsive */
+        @media screen and (max-width: 1100px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .academic-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .header-content p {
+                font-size: 1.1rem;
+            }
+            
+            .nav-list {
+                display: none;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-images {
+                margin-top: 40px;
+            }
+            
+            .academic-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .review-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .review-img {
+                margin-bottom: 25px;
+            }
+            
+            .contact-container {
+                padding: 0 20px;
+            }
+        }
+        /* Milestones Section Styles */
+.milestones-section {
+    background-color: #e8e0da; /* Light beige background matching the image */
+    padding: 90px 0;
+    text-align: center;
+}
+
+.milestones-intro {
+    max-width: 850px;
+    margin: 0 auto 60px;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #8b5b24; /* Brown text color matching the heading */
+    font-style: italic;
+    font-weight: 300;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.milestones-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.milestone-card {
+    background-color: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.milestone-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(192, 132, 151, 0.2);
+}
+
+.milestone-img {
+    height: 250px;
+    overflow: hidden;
+}
+
+.milestone-img img {
+    width: 70%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.milestone-card:hover .milestone-img img {
+    transform: scale(1.05);
+}
+
+.milestone-content {
+    padding: 25px 20px;
+    text-align: left;
+    background-color: #fff;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.milestone-title {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: #8b5b24; /* Brown color matching heading */
+    font-weight: 500;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.milestone-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #555;
+    font-weight: 300;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 1100px) {
+    .milestones-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .milestones-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .milestones-intro {
+        font-size: 1.1rem;
+        padding: 0 20px;
+    }
+}
+/* Additional CSS for the updated contact section */
+.contact-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact-info {
+    background-color: rgba(34, 34, 34, 0.8);
+    padding: 50px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 700px;
+}
+
+.contact-message {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1.2rem;
+    color: var(--primary);
+    font-weight: 400;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+/* Adjust the social media icons */
+.contact-icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+@media screen and (max-width: 768px) {
+    .contact-info {
+        padding: 30px;
+    }
+    
+    .contact-message {
+        font-size: 1.1rem;
+    }
+}
+
+/* Improved Mobile Menu Styles */
+@media screen and (max-width: 768px) {
+    .hamburger-menu {
+        display: block;
+        cursor: pointer;
+        z-index: 1001;
+    }
+    
+    .bar1, .bar2, .bar3 {
+        width: 30px;
+        height: 3px;
+        background-color: var(--light);
+        margin: 6px 0;
+        transition: 0.4s;
+        border-radius: 3px;
+    }
+    
+    .hamburger-menu.change .bar1 {
+        transform: rotate(-45deg) translate(-5px, 6px);
+        background-color: var(--primary);
+    }
+    
+    .hamburger-menu.change .bar2 {
+        opacity: 0;
+    }
+    
+    .hamburger-menu.change .bar3 {
+        transform: rotate(45deg) translate(-5px, -6px);
+        background-color: var(--primary);
+    }
+    
+    .nav-list {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.95);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.4s ease;
+        z-index: 1000;
+    }
+    
+    .nav-list.active {
+        right: 0;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+    }
+    
+    .nav-list li {
+        margin: 15px 0;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.4s ease;
+        transition-delay: 0s;
+    }
+    
+    .nav-list.active li {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    /* Add sequential delays to menu items for animation */
+    .nav-list.active li:nth-child(1) { transition-delay: 0.1s; }
+    .nav-list.active li:nth-child(2) { transition-delay: 0.15s; }
+    .nav-list.active li:nth-child(3) { transition-delay: 0.2s; }
+    .nav-list.active li:nth-child(4) { transition-delay: 0.25s; }
+    .nav-list.active li:nth-child(5) { transition-delay: 0.3s; }
+    .nav-list.active li:nth-child(6) { transition-delay: 0.35s; }
+    .nav-list.active li:nth-child(7) { transition-delay: 0.4s; }
+    .nav-list.active li:nth-child(8) { transition-delay: 0.45s; }
+    .nav-list.active li:nth-child(9) { transition-delay: 0.5s; }
+    
+    .nav-list a {
+        font-size: 1.3rem;
+        color: var(--light);
+        padding: 8px 15px;
+        display: block;
+    }
+    
+    .nav-list a:hover {
+        color: var(--primary);
+    }
+}
+    </style>
+
+</head>
+<body>
+
+    <nav id="main-nav">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <div class="logo-img">M</div>
+                LINGUAPATH
+            </a>
+            <div class="hamburger-menu">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+            </div>
+            <ul class="nav-list">
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#academic">Academic</a></li>
+                <li><a href="#social">Social Life</a></li>
+                <li><a href="#interests">Interests</a></li>
+                <li><a href="#professional">Projects</a></li>
+                <li><a href="#milestones">Milestones</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#resume">Resume</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header id="home">
+    <div class="header-bg"></div>
+    <div class="container">
+        <div class="header-content">
+            <h1>The way to a brighter future</h1>
+            <p>Language as a gateway to new opportunities and experiences</p>
+            <a href="#about" class="btn">GO FURTHER</a>
+        </div>
+    </div>
+    <a href="#about" class="arrow-down">
+        <svg width="20" height="10" viewBox="0 0 38.417 18.592" fill="white">
+            <g>
+                <path d="M19.208,18.592c-0.241,0-0.483-0.087-0.673-0.261L0.327,1.74c-0.408-0.372-0.438-1.004-0.066-1.413c0.372-0.409,1.004-0.439,1.413-0.066L19.208,16.24L36.743,0.261c0.411-0.372,1.042-0.342,1.413,0.066c0.372,0.408,0.343,1.041-0.065,1.413L19.881,18.332C19.691,18.505,19.449,18.592,19.208,18.592z"/>
+            </g>
+        </svg>
+    </a>
+</header>
+
+    
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Me</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p><strong><em>Hi! My name is Malika!</em></strong></p>
+                    <p>I am a dedicated English teacher with over three years of teaching experience, specializing in helping learners achieve fluency, confidence, and academic success.</p>
+                    <p>Throughout my career, I have had the privilege of working with students of various ages and backgrounds, both in traditional classroom settings and online. If you seek a student-centered, highly interactive, and tailored approach to meet the individual needs of every learner.</p>
+                    <p><strong>Welcome to Your English Learning Journey!</strong></p>
+                </div>
+                <div class="about-images">
+                    <div class="about-image">
+                        <div class="about-image-container">
+                            <img src="https://i.ibb.co/JR92bqt3/photo-2025-04-28-23-47-26.jpg" alt="Teaching English">
+                        </div>
+                    </div>
+                    <div class="about-image">
+                        <div class="about-image-container">
+                            <img src="https://i.ibb.co/Kp9MNyXS/photo-2025-04-28-23-47-24.jpg" alt="English Classes">
+                        </div>
+                    </div>
+                    <div class="about-image">
+                        <div class="about-image-container">
+                            <img src="https://i.ibb.co/GvgFrwn4/photo-2025-04-28-23-47-22.jpg" alt="Language Learning">
+                        </div>
+                    </div>
+                    <div class="about-image">
+                        <div class="about-image-container">
+                            <img src="https://i.ibb.co/V0wVzwQ0/photo-2025-04-28-23-47-23.jpg" alt="English Teacher">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Academic Background -->
+    <section id="academic" class="academic-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Academic Background</h2>
+            </div>
+            <div class="academic-text">
+                I hold a strong educational background, having graduated from <strong><em>Bilim-Innovation High School for Gifted Girls in 2022</em></strong>, (GPA 5.0/5.0) with excellence. Currently, I am pursuing my degree at <strong>SDU University '26</strong> (GPA 3.8/4) and have further enriched my academic experience through an international exchange program at <strong><em>Vistula University in Warsaw, Poland</em></strong> (GPA 3.8/4). These experiences have given me a global perspective on education and language learning, which I integrate into my teaching approach. Moreover, from my school years, I have attended various Regional and National English Olympiads.
+            </div>
+            <div class="academic-grid">
+                <div class="academic-item">
+                    <div class="academic-img">
+                        
+                        <img src="https://i.ibb.co/TxpgH4y0/photo-2025-04-28-23-47-34.jpg" alt="SDU University">
+                    </div>
+                    <div class="academic-caption">
+                        <h3>Bilim-Innovation High School</h3>
+                        <p>Graduated with excellence (GPA 5.0/5.0)</p>
+                    </div>
+                </div>
+                <div class="academic-item">
+                    <div class="academic-img">
+                        <img src="https://i.ibb.co/Zz3nf6Wr/photo-2025-04-28-23-47-33.jpg" alt="Bilim-Innovation High School">
+                    </div>
+                    <div class="academic-caption">
+                        <h3>SDU University</h3>
+                        <p>Currently pursuing degree (GPA 3.8/4.0)</p>
+                    </div>
+                </div>
+                <div class="academic-item">
+                    <div class="academic-img">
+                        <img src="https://i.ibb.co/21kvdLpX/photo-2025-04-28-23-47-35.jpg" alt="Vistula University, Warsaw">
+                    </div>
+                    <div class="academic-caption">
+                        <h3>Vistula University, Poland</h3>
+                        <p>International exchange program (GPA 3.8/4.0)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Life Section -->
+    <section id="social" class="social-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Social Life</h2>
+            </div>
+            <div class="social-grid">
+                <div class="social-card">
+                    <div class="social-icon">
+                        <img src="https://i.ibb.co/21kvdLpX/photo-2025-04-28-23-47-35.jpg" alt="Travel Icon">
+                    </div>
+                    <div class="social-content">
+                        <h3>Travelling</h3>
+                        <p>I am keen on travelling and have already visited 15 countries and many more cities. I find it astonishing to dive into new cultures and exploring the globe through my own eyes</p>
+                    </div>
+                </div>
+                <div class="social-card">
+                    <div class="social-icon">
+                        <img src="https://i.ibb.co/spLhyJKG/photo-2025-04-28-23-47-37.jpg" alt="Hiking Icon">
+                    </div>
+                    <div class="social-content">
+                        <h3>Hiking</h3>
+                        <p>I'm also deeply passionate about nature, and I have been a member of the Mountain Kings students' organisation. This was the photoshoot with our own MK clothings</p>
+                    </div>
+                </div>
+                <div class="social-card">
+                    <div class="social-icon">
+                        <img src="https://i.ibb.co/qLxqVDr8/photo-2025-04-28-23-47-36.jpg" alt="Photography Icon">
+                    </div>
+                    <div class="social-content">
+                        <h3>Taking Pictures</h3>
+                        <p>I've developed a real fondness for photography, and throughout my adventurous trips, I have made thousands of picturesque images that many people have asked to share. All of the visuals from this page are also mine</p>
+                    </div>
+                </div>
+                <div class="social-card">
+                    <div class="social-icon">
+                        <img src="https://i.ibb.co/ZzxdxWKm/photo-2025-04-28-23-47-38.jpg" alt="Cooking Icon">
+                    </div>
+                    <div class="social-content">
+                        <h3>Cooking</h3>
+                        <p>Cooking has become an integral part of my life. I genuinely find joy in making something sweet for my closest ones, and I regularly share my love that way</p>
+                    </div>
+                </div>
+                <div class="social-card">
+                    <div class="social-icon">
+                        <img src="https://i.ibb.co/BVTpMC7W/photo-2025-04-28-23-47-39.jpg" alt="Dancing Icon">
+                    </div>
+                    <div class="social-content">
+                        <h3>Dancing</h3>
+                        <p>It is a source of endless inspiration for me. I have been a part of the Vistula Dance Club during my exchange year, which gave me a chance to dive deeper into their culture and to find friends around the world</p>
+                    </div>
+                </div>
+                <div class="social-card">
+                    <div class="social-icon">
+                        <img src="https://i.ibb.co/vCTRyVc1/photo-2025-04-28-23-47-40.jpg" alt="Social Icon">
+                    </div>
+                    <div class="social-content">
+                        <h3>Hanging out</h3>
+                        <p>I feel most alive when I'm with my family and friends, so each time they are beside I feel fulfilled and resourceful. So, that's why I try to allocate my free time to spend it with my tight-knit community.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interests Section -->
+    <section id="interests" class="interests-section">
+        <div class="container">
+            <div class="interests-container">
+                <h2 class="interests-title">Interests</h2>
+                <p class="interests-text">
+                    Helping youth and grow up through teaching them the English language; motivating them to gain hard and soft skills; supporting them by active listening; helping young co-workers to grow professionally by sharing teaching experience and modern techniques; helping with organizing lesson plans and schedules; providing training, workshops and discussion clubs
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section id="quote" class="quote-section">
+        <div class="container">
+            <div class="quote-container">
+                <h2 class="quote-title">Quote or motivation</h2>
+                <p class="quote-text">Aspire to inspire before we expire</p>
+                <a href="#contact" class="btn">GET YOUR JOURNEY STARTED</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Background -->
+    <section id="professional" class="professional-section">
+        <div class="container professional-container">
+            <div class="section-title">
+                <h2>Professional Background</h2>
+            </div>
+            <div class="professional-intro">
+                Explore a portfolio of my work, showcasing my professional background and highlighting my ability to design dynamic and impactful learning experiences.
+            </div>
+            <div class="professional-grid">
+                <div class="professional-card">
+                    <div class="professional-icon"></div>
+                    <div class="professional-content">
+                        <h3>Platform for English Teachers</h3>
+                        <p>Together with my brother and other IT specialists from Prague, we have been working on an online platform to make English Teachers' lives easier.</p>
+                    </div>
+                </div>
+                <div class="professional-card">
+                    <div class="professional-icon"></div>
+                    <div class="professional-content">
+                        <h3><em>Educational Blog: Tips for Language Learners</em></h3>
+                        <p>I led and published blog posts offering advice, resources, and study tips for English learners preparing for exams or looking to improve their general communication skills.</p>
+                    </div>
+                </div>
+                <div class="professional-card">
+                    <div class="professional-icon"></div>
+                    <div class="professional-content">
+                        <h3><em>IELTS Speaking Workshop</em></h3>
+                        <p>Together with other colleagues, we organized and delivered a series of workshops focused on boosting students' confidence and fluency for the IELTS Speaking module. Also, included personalized feedback sessions and practice tests.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Gallery</h2>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/9B0bbrz/photo-2025-04-29-00-18-28.jpg" alt="Gallery Image 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/G4swkt6S/photo-2025-04-29-00-18-26.jpg" alt="Gallery Image 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/chT5MVx5/photo-2025-04-29-00-18-24.jpg" alt="Gallery Image 3">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Milestones Section -->
+<section id="milestones" class="milestones-section">
+    <div class="container">
+        <div class="section-title" style="font-size: large; color:rgba(192, 132, 151, 0.2) !important">
+            <h2 style="font-size: 50px; color:rgba(0, 0, 0, 0.2) !important">My milestones</h2>
+        </div>
+        <div class="milestones-intro">
+            Explore my notable achievements and recognitions that reflect my expertise and dedication to the field of English teaching.
+        </div>
+        <div class="milestones-grid">
+            <div class="milestone-card">
+                <div class="milestone-img">
+                    <img src="https://i.ibb.co/hxwcY2vQ/photo-2025-04-29-00-55-43.jpg" alt="CELTA certificate">
+                </div>
+                <div class="milestone-content">
+                    <h3 class="milestone-title">CELTA certificate holder</h3>
+                    <p class="milestone-description">Having successfully completed the Cambridge English Level 5 Certificate in Teaching English to Speakers of Other Languages (CELTA). I possess strong practical skills and theoretical knowledge in teaching English to speakers of other languages.</p>
+                </div>
+            </div>
+            <div class="milestone-card">
+                <div class="milestone-img">
+                    <img src="https://i.ibb.co/Q3cNvKB5/photo-2025-04-29-00-55-46.jpg" alt="Vilnius EU Conference">
+                </div>
+                <div class="milestone-content">
+                    <h3 class="milestone-title">Vilnius EU Conference Presenter Certification</h3>
+                    <p class="milestone-description">Presented research on effective English language teaching strategies.</p>
+                </div>
+            </div>
+            <div class="milestone-card">
+                <div class="milestone-img">
+                    <img src="https://i.ibb.co/MDrSZHLL/photo-2025-04-29-00-55-47.jpg" alt="IELTS certificate">
+                </div>
+                <div class="milestone-content">
+                    <h3 class="milestone-title">Candidate with an IELTS band 8.0</h3>
+                    <p class="milestone-description">I am a candidate with an IELTS Band 8.0, demonstrating a high level of English proficiency in academic and professional communication.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="reviews-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>The reviews came from my lovely students</h2>
+            </div>
+            <div class="reviews-container">
+                <div class="reviews-grid">
+                    <div class="review-card">
+                        <div class="review-img">
+                            <img src="https://i.ibb.co/k28G7vdC/photo-2025-04-28-23-47-43.jpg" alt="Nargiz">
+                        </div>
+                        <div class="review-content">
+                            <p class="review-text">Хотелось бы поблагодарить моего преподавателя мисс Малика за самые комфортные и теплые уроки английского. Всего за месяц я очень сильно прокачала свою грамматику и разговорную речь, что я ощущаю с каждым уроком все больше. Я с удовольствием бегу на урок, так как с ней можно не только получить хорошие знания, но и раскрепоститься, не стесняться, что очень важно в изучении языка. Человек располагает и становится лучшим другом на время занятия ❤️❤️</p>
+                            <h4 class="review-author">Nargiz</h4>
+                            <p class="review-position">Accountant in Budapest, Hungary</p>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-img">
+                            <img src="https://i.ibb.co/0yfcJRyr/photo-2025-04-28-23-47-44.jpg" alt="Kymbat">
+                        </div>
+                        <div class="review-content">
+                            <p class="review-text">Мне занятия очень нравятся, особенно с Тичером Малика, она все объясняет доступным языком, с ней очень интересно проводить спикинг парт) Ее уроки меня очень сильно мотивируют, она не только обучает ну и дает дельные советы и направляет в лучшую сторону)) очень благодарна ей ❤️</p>
+                            <h4 class="review-author">Kymbat</h4>
+                            <p class="review-position">Payroll Specialist in Almaty, Kazakhstan</p>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-img">
+                            <img src="https://i.ibb.co/6RK1vdDJ/photo-2025-04-28-23-47-45.jpg" alt="Aisha, Italy">
+                        </div>
+                        <div class="review-content">
+                            <p class="review-text">Возвращаясь на пол года назад я понимаю что мы проделали гигантскую работу , так как в начале было столько сомнений и страхов что у меня ничего не получиться но благодаря вам получилось преодолеть эти свои предубеждения . Я довольна проделанной работой и работать с вами сплошное удовольствие и планирую дальше продолжать наше обучение. Результат проделанной работы конечно на лицо , так как я начала более уверенно вести диалоги с иностранными друзьями не боясь остаться непонятой:) за что спасибо вам С вашим умением находить индивидуальный подход уроки проходят так непринужденно и весело , что каждый раз с нетерпением жду новой встречи.</p>
+                            <h4 class="review-author">Aisha, Italy</h4>
+                            <p class="review-position">Fashion specialist in Milano, Italy</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="resume-section">
+        <div class="container">
+            <div class="resume-container">
+                <div class="resume-header">
+                    <h2>Malika's Resume</h2>
+                    <p>English Teacher & Language Learning Specialist</p>
+                </div>
+                
+                <h3 class="resume-section-title">Education</h3>
+                <div class="resume-item">
+                    <h4 class="resume-item-title">SDU University</h4>
+                    <div class="resume-item-subtitle">Bachelor's Degree</div>
+                    <div class="resume-item-date">2022 - Present (GPA: 3.8/4.0)</div>
+                    <p class="resume-item-description">Currently pursuing my degree with focus on languages and education.</p>
+                </div>
+                <div class="resume-item">
+                    <h4 class="resume-item-title">Vistula University, Warsaw, Poland</h4>
+                    <div class="resume-item-subtitle">International Exchange Program</div>
+                    <div class="resume-item-date">2023 (GPA: 3.8/4.0)</div>
+                    <p class="resume-item-description">Participated in an exchange program that enhanced my global perspective on education and language learning.</p>
+                </div>
+                <div class="resume-item">
+                    <h4 class="resume-item-title">Bilim-Innovation High School for Gifted Girls</h4>
+                    <div class="resume-item-subtitle">High School Diploma</div>
+                    <div class="resume-item-date">Graduated 2022 (GPA: 5.0/5.0)</div>
+                    <p class="resume-item-description">Graduated with excellence. Participated in various Regional and National English Olympiads.</p>
+                </div>
+                
+                <h3 class="resume-section-title">Teaching Experience</h3>
+                <div class="resume-item">
+                    <h4 class="resume-item-title">English Language Teacher</h4>
+                    <div class="resume-item-subtitle">Private Practice</div>
+                    <div class="resume-item-date">2020 - Present</div>
+                    <p class="resume-item-description">Provide personalized English language instruction to students of various ages and backgrounds. Focus on developing speaking confidence, grammar proficiency, and exam preparation.</p>
+                </div>
+                
+                <h3 class="resume-section-title">Projects & Initiatives</h3>
+                <div class="resume-item">
+                    <h4 class="resume-item-title">Platform for English Teachers</h4>
+                    <div class="resume-item-date">2022 - Present</div>
+                    <p class="resume-item-description">Collaborating with IT specialists to develop an online platform designed to streamline teaching resources and lesson planning for English language educators.</p>
+                </div>
+                <div class="resume-item">
+                    <h4 class="resume-item-title">Educational Blog</h4>
+                    <div class="resume-item-date">2021 - Present</div>
+                    <p class="resume-item-description">Author and curator of a blog providing tips, resources, and study strategies for English language learners preparing for exams or improving communication skills.</p>
+                </div>
+                <div class="resume-item">
+                    <h4 class="resume-item-title">IELTS Speaking Workshop</h4>
+                    <div class="resume-item-date">2022</div>
+                    <p class="resume-item-description">Co-organized and delivered workshops focused on improving students' confidence and fluency for the IELTS Speaking module, including personalized feedback sessions.</p>
+                </div>
+                
+                <h3 class="resume-section-title">Skills</h3>
+                <div class="resume-skills">
+                    <span class="resume-skill">English Language Teaching</span>
+                    <span class="resume-skill">Curriculum Development</span>
+                    <span class="resume-skill">IELTS Preparation</span>
+                    <span class="resume-skill">Conversational English</span>
+                    <span class="resume-skill">Grammar Instruction</span>
+                    <span class="resume-skill">Educational Technology</span>
+                    <span class="resume-skill">Student Assessment</span>
+                    <span class="resume-skill">Workshop Facilitation</span>
+                    <span class="resume-skill">Content Creation</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z"/>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Name</h4>
+                            <p>Malika</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"/>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p>220302229@stu.sdu.edu.kz</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20 15.5C18.8 15.5 17.5 15.3 16.4 14.9C16.3 14.9 16.2 14.9 16.1 14.9C15.8 14.9 15.6 15 15.4 15.2L13.2 17.4C10.4 15.9 8 13.6 6.6 10.8L8.8 8.6C9.1 8.3 9.2 7.9 9 7.6C8.7 6.5 8.5 5.2 8.5 4C8.5 3.5 8 3 7.5 3H4C3.5 3 3 3.5 3 4C3 13.4 10.6 21 20 21C20.5 21 21 20.5 21 20V16.5C21 16 20.5 15.5 20 15.5ZM20 4H17C16.45 4 16 4.45 16 5C16 7.61 16.96 10 18.67 11.71C19.5 12.54 20.7 12.93 21.77 13.26C21.91 13.3 22 13.44 22 13.6V16C22 16.55 22.45 17 23 17C23.55 17 24 16.55 24 16V13.5C24 13.22 23.78 13 23.5 13C22.92 13 22.3 12.97 21.71 12.83C20.43 12.54 19.25 12.21 18.56 11.53C17.16 10.13 16.3 8.13 16.26 6H19.74C19.91 6.58 20.21 7.12 20.65 7.55C21.09 7.99 21.63 8.28 22.22 8.44V5C22 4.45 21.55 4 21 4Z"/>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Phone</h4>
+                            <p>87771129736</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z"/>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Location</h4>
+                            <p>Global Online Teaching</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Instagram</h4>
+                            <p>@mkairbolatova</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 240 240" fill="currentColor">
+                                <path d="M120 0C53.729 0 0 53.729 0 120c0 66.271 53.729 120 120 120s120-53.729 120-120C240 53.729 186.271 0 120 0zm57.468 79.805l-17.098 80.754c-1.294 5.709-4.723 7.135-9.565 4.449l-26.44-19.493-12.75 12.293c-1.407 1.407-2.584 2.584-5.291 2.584l1.896-26.806 48.876-44.173c2.125-1.896-.465-2.954-3.293-1.058l-60.367 38.077-26-8.115c-5.651-1.758-5.709-5.651 1.173-8.356l101.581-39.207c4.707-1.758 8.801 1.058 7.185 8.041z"/>
+                              </svg>                              
+                        </div>
+                        <div class="contact-details">
+                            <h4>Telegram</h4>
+                            <p>@makooun</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <h4>LinkedIn</h4>
+                            <p>Malika Kairbolatova</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M11.99 2C6.47 2 2 6.48 2 12C2 17.52 6.47 22 11.99 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 11.99 2ZM12 20C7.58 20 4 16.42 4 12C4 7.58 7.58 4 12 4C16.42 4 20 7.58 20 12C20 16.42 16.42 20 12 20ZM12.5 7H11V13L16.25 16.15L17 14.92L12.5 12.25V7Z"/>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Working Hours</h4>
+                            <p>Mon - Fri: 9am - 6pm</p>
+                        </div>
+                    </div>
+                    <div class="contact-message">
+                        <p>Thank you! Feel free to reach out</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hamburger menu toggle
+            const hamburger = document.querySelector('.hamburger-menu');
+            const navList = document.querySelector('.nav-list');
+            
+            if (hamburger && navList) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('change');
+                    navList.classList.toggle('active');
+                    
+                    // This prevents scrolling when menu is open
+                    if (navList.classList.contains('active')) {
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        document.body.style.overflow = '';
+                    }
+                });
+                
+                // Close menu when a link is clicked
+                const navLinks = document.querySelectorAll('.nav-list a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        hamburger.classList.remove('change');
+                        navList.classList.remove('active');
+                        document.body.style.overflow = '';
+                    });
+                });
+            }
+            
+            // Navigation scroll effect
+            function handleScrollEffect() {
+                const nav = document.getElementById('main-nav');
+                if (window.scrollY > 100) {
+                    nav.classList.add('nav-scrolled');
+                } else {
+                    nav.classList.remove('nav-scrolled');
+                }
+            }
+            
+            window.addEventListener('scroll', handleScrollEffect);
+            handleScrollEffect(); // Run once on load
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        const navHeight = document.querySelector('nav').offsetHeight;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('main-nav');
+            
+            if (window.scrollY > 100) {
+                nav.classList.add('nav-scrolled');
+            } else {
+                nav.classList.remove('nav-scrolled');
+            }
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    const navHeight = document.querySelector('nav').offsetHeight;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Normally, you would send form data to a server here
+                // For demo purposes, we'll just show an alert
+                alert('Thank you for your message! I will get back to you soon.');
+                contactForm.reset();
+            });
+        }
+    </script>
+</body>
+</html>
